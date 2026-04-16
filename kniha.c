@@ -8,7 +8,7 @@
 
 // Zvětší paměť pro knihovnu, když dochází = přidání další knihy není možné
 // Paměť se zvětší vždy jednou tolik, ať to není nutné dělat při každé knize
-int rozsir_pamet_kdyz_je_potreba(Knihovna *knihovna) {
+int rozsir_pamet_knihovny(Knihovna *knihovna) {
     // Když je dost paměti - tak nic nedělej
     if (knihovna->pocet_knih < knihovna->alokovana_pamet)
         return 1;
@@ -43,38 +43,38 @@ void inicializuj_knihovnu(Knihovna *knihovna) {
     knihovna->data = NULL;
     knihovna->pocet_knih = 0;
     knihovna->alokovana_pamet = 0;
-    rozsir_pamet_kdyz_je_potreba(knihovna);
+    rozsir_pamet_knihovny(knihovna);
 }
 
 // Zobraz informaci o počtu knih v knihovně a velikosti alokované paměti
 void zobraz_udaje_o_knihovne(Knihovna *knihovna) {
-    printf("  Knihy: %d celkem %d alokovaná paměť\n\n", knihovna->pocet_knih, knihovna->alokovana_pamet);
+    printf("  Knihy: %d celkem %d alokovaná paměť\n", knihovna->pocet_knih, knihovna->alokovana_pamet);
 }
 
 // Přidej knihu jako vstup z klávesnice a přidej ji do souboru i do vnitřní paměti
 void pridat_knihu(Knihovna *knihovna) {
-    rozsir_pamet_kdyz_je_potreba(knihovna);
+    rozsir_pamet_knihovny(knihovna);
 
     FILE *soubor = otvreni_souboru("knihy.txt", "a+");
 
-    Kniha kniha = knihovna->data[knihovna->pocet_knih];
+    Kniha *kniha = &knihovna->data[knihovna->pocet_knih];
 
     printf ("Zadejte jmeno knihy: ");
-    fgets(kniha.jmeno_knihy, sizeof(kniha.jmeno_knihy), stdin);
-    odstraneni_entru(kniha.jmeno_knihy);
+    fgets(kniha->jmeno_knihy, sizeof(kniha->jmeno_knihy), stdin);
+    odstraneni_entru(kniha->jmeno_knihy);
 
     printf ("Zadejte jmeno autora: ");
-    fgets (kniha.jmeno_autora, sizeof(kniha.jmeno_autora), stdin);
-    odstraneni_entru(kniha.jmeno_autora);
+    fgets (kniha->jmeno_autora, sizeof(kniha->jmeno_autora), stdin);
+    odstraneni_entru(kniha->jmeno_autora);
 
     printf ("Zadejte prijmeni autora: ");
-    fgets (kniha.prijmeni_autora, sizeof(kniha.prijmeni_autora), stdin);
-    odstraneni_entru(kniha.prijmeni_autora);
+    fgets (kniha->prijmeni_autora, sizeof(kniha->prijmeni_autora), stdin);
+    odstraneni_entru(kniha->prijmeni_autora);
 
     printf ("Zadejte rok vydani knihy: ");
-    scanf ("%i", &kniha.rok_vydani);
+    scanf ("%i", &kniha->rok_vydani);
 
-    fprintf (soubor, "%s, %s, %s, %i\n", kniha.jmeno_knihy, kniha.jmeno_autora, kniha.prijmeni_autora, kniha.rok_vydani);
+    fprintf (soubor, "%s, %s, %s, %i\n", kniha->jmeno_knihy, kniha->jmeno_autora, kniha->prijmeni_autora, kniha->rok_vydani);
 
     fclose(soubor);
 
@@ -104,7 +104,7 @@ void nacti_knihy(Knihovna *knihovna) {
     while (nacti_knihu_ze_souboru(soubor, &knihovna->data[knihovna->pocet_knih]) == 4) {
         knihovna->pocet_knih++;
 
-        rozsir_pamet_kdyz_je_potreba(knihovna);
+        rozsir_pamet_knihovny(knihovna);
     }
 
     fclose(soubor);

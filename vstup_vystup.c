@@ -55,7 +55,7 @@ FILE* otvreni_souboru(char *jmeno_souboru, char *mode) {
 
     soubor = fopen (jmeno_souboru, mode);
     if(soubor == NULL){
-        printf ("Chyba pri otevirani souboru");
+        printf ("Chyba pri otevirani souboru %s\n", jmeno_souboru);
     }
     return soubor;
 }
@@ -64,12 +64,13 @@ FILE* otvreni_souboru(char *jmeno_souboru, char *mode) {
 char menu() {
     char znak;
 
-    printf("MENU: \n");
+    printf("\nMENU: \n");
     printf("w - Vypsat knihy \n");
+    printf("v - Vypsat ctenare \n");
+    printf("e - Pridat knihu \n");
     printf("s - Pridat ctenare \n");
     printf("a - Vypujcit knihu \n");
     printf("d - Vratit knihu \n");
-    printf("e - Pridat knihu \n");
     printf("r - Konec \n");
 
     cteni_z_klavesnice(&znak);
