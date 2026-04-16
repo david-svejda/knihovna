@@ -50,7 +50,7 @@ void odstraneni_entru(char *pole) {
 }
 
 //funkce otevreni souboru
-FILE* otvreni_souboru (char *jmeno_souboru) {
+FILE* otvreni_souboru(char *jmeno_souboru) {
     FILE *soubor;
 
     soubor = fopen (jmeno_souboru, "a+");

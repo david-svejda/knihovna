@@ -6,6 +6,6 @@ char menu();
 
 int cteni_z_klavesnice(char *znak);
 void odstraneni_entru(char *pole);
-FILE* otvreni_souboru (char *jmeno_souboru);
+FILE* otvreni_souboru(char *jmeno_souboru);
 
 #endif //KNIHOVNA_MENU_H
