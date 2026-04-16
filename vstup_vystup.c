@@ -50,10 +50,10 @@ void odstraneni_entru(char *pole) {
 }
 
 //funkce otevreni souboru
-FILE* otvreni_souboru(char *jmeno_souboru) {
+FILE* otvreni_souboru(char *jmeno_souboru, char *mode) {
     FILE *soubor;
 
-    soubor = fopen (jmeno_souboru, "a+");
+    soubor = fopen (jmeno_souboru, mode);
     if(soubor == NULL){
         printf ("Chyba pri otevirani souboru");
     }

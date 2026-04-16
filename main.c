@@ -6,18 +6,26 @@
 int main(void) {
     Knihovna knihovna;
 
-    // TODO inicializuj knihovnu
+    // Inicializuj knihovnu
+    inicializuj_knihovnu(&knihovna);
+    nacti_knihy(&knihovna);
 
     while (1) {
+        zobraz_udaje_o_knihovne(&knihovna);
         char volba = menu();
 
         switch (volba) {
+            case 'w':
+                vypis_knihovnu(&knihovna);
+                break;
+
             case 'e':
                 pridat_knihu(&knihovna);
                 break;
 
             case 'r':
-                // TODO uvolni pamet
+                // Uvolni pamet
+                uvolni_pamet_knihovny(&knihovna);
                 printf ("KONEC...");
                 return 0;
 
