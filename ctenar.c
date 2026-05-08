@@ -54,6 +54,7 @@ void vypsat_ctenare() {
 void nacti_ctenare() {
     // otevri soubor
     FILE *soubor = otvreni_souboru(DB_CTENARU);
+    rewind(soubor);
 
     // prochazej po radku a zapisuj do pameti a pro jistotu si zvetsuj pamet
     rozsir_ctenare();
